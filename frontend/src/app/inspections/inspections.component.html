@@ -1,0 +1,88 @@
+<!-- Кнопка шестерёнки и выбор устройства -->
+<div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+  <button (click)="toggleSettings()" aria-label="Настройки устройств" class="icon-button">⚙️</button>
+</div>
+
+<div *ngIf="showSettings">
+  <div class="modal-backdrop" (click)="toggleSettings()"></div>
+
+  <div class="modal-window" (click)="$event.stopPropagation()">
+    <h3>Управление устройствами</h3>
+
+    <div style="margin-bottom: 15px;">
+      <button [class.selected]="deviceType === 'thermometer'" (click)="selectDevice('thermometer')" class="btn-toggle">Термометры</button>
+      <button [class.selected]="deviceType === 'scale'" (click)="selectDevice('scale')" class="btn-toggle">Весы</button>
+    </div>
+
+    <!-- Термометры -->
+    <ul *ngIf="deviceType === 'thermometer'" class="thermometer-list">
+      <li *ngFor="let t of thermometers; let i = index" class="thermometer-item">
+        <input [(ngModel)]="t.info" placeholder="Информация" />
+        <input [(ngModel)]="t.serial" placeholder="Серийный номер" class="small-input" />
+        <input type="date" [(ngModel)]="t.calibration_date" class="small-input" />
+        <button (click)="saveThermometer(t, i)" class="btn save-btn">Сохранить</button>
+        <button (click)="deleteThermometer(t.id, i)" class="btn delete-btn">Удалить</button>
+      </li>
+    </ul>
+
+    <hr *ngIf="deviceType === 'thermometer'" />
+
+    <div *ngIf="deviceType === 'thermometer'" class="new-thermometer-form">
+      <input [(ngModel)]="newThermometer.info" placeholder="Информация" />
+      <input [(ngModel)]="newThermometer.serial" placeholder="Серийный номер" class="small-input" />
+      <input type="date" [(ngModel)]="newThermometer.calibration_date" class="small-input" />
+      <button (click)="addThermometer()" class="btn add-btn">Добавить</button>
+    </div>
+
+    <!-- Весы -->
+    <ul *ngIf="deviceType === 'scale'" class="thermometer-list">
+      <li *ngFor="let s of scales; let i = index" class="thermometer-item">
+        <input [(ngModel)]="s.model" placeholder="Модель" />
+        <input [(ngModel)]="s.serial_number" placeholder="Заводской номер" class="small-input" />
+        <input type="date" [(ngModel)]="s.calibration_date" class="small-input" />
+        <button (click)="saveScale(s, i)" class="btn save-btn">Сохранить</button>
+        <button (click)="deleteScale(s.id, i)" class="btn delete-btn">Удалить</button>
+      </li>
+    </ul>
+
+    <hr *ngIf="deviceType === 'scale'" />
+
+    <div *ngIf="deviceType === 'scale'" class="new-thermometer-form">
+      <input [(ngModel)]="newScale.model" placeholder="Модель" />
+      <input [(ngModel)]="newScale.serial_number" placeholder="Заводской номер" class="small-input" />
+      <input type="date" [(ngModel)]="newScale.calibration_date" class="small-input" />
+      <button (click)="addScale()" class="btn add-btn">Добавить</button>
+    </div>
+  </div>
+</div>
+
+<!-- Остальная таблица инспекций... -->
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="table-header-cell">Номер машины</th>
+        <th class="table-header-cell">Дата инспекции</th>
+        <th class="table-header-cell">ФИО инспектора</th>
+        <th class="table-header-cell">Номер работы</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let inspection of pagedInspections; let i = index">
+        <tr class="table-row" (click)="goToDetail(inspection.id)" style="cursor: pointer;">
+          <td class="table-cell">{{ inspection.car_number }}</td>
+          <td class="table-cell">{{ inspection.inspection_date | date:'dd.MM.yyyy' }}</td>
+          <td class="table-cell">{{ inspection.inspector_name }}</td>
+          <td class="table-cell">{{ inspection.job_number }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-container" *ngIf="totalPages > 1">
+  <button class="pagination-button" (click)="changePage(page - 1)" [disabled]="page === 1">← Назад</button>
+  <span class="pagination-info">Страница {{ page }} из {{ totalPages }}</span>
+  <button class="pagination-button" (click)="changePage(page + 1)" [disabled]="page === totalPages">Вперёд →</button>
+</div>
+

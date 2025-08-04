@@ -1,0 +1,163 @@
+<div *ngIf="inspection" class="detail-container">
+  <div class="header-row">
+    <div>
+      <label for="jobNumberInput"><strong>Номер работы:</strong></label>
+      <input
+        id="jobNumberInput"
+        type="text"
+        [(ngModel)]="inspection.job_number"
+        placeholder="Введите номер работы"
+        (keydown.enter)="saveJobNumber()"
+      />
+      <p><strong>Дата инспекции:</strong> {{ inspection.inspection_date }}</p>
+      <p><strong>Инспектор:</strong> {{ inspection.inspector_name }}</p>
+    </div>
+    <button mat-raised-button color="primary" class="export-btn" (click)="exportReport()">
+      <mat-icon>description</mat-icon> Выгрузить отчет
+    </button>
+  </div>
+
+  <mat-accordion multi>
+
+    <!-- 1. Размещение -->
+  <mat-expansion-panel *ngIf="currentStorage">
+    <mat-expansion-panel-header>
+      <mat-panel-title>1. РАЗМЕЩЕНИЕ ТОВАРА</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <p>Количество ящиков: {{ currentStorage.quantity_of_boxes }}</p>
+    <p>Количество поддонов: {{ currentStorage.quantity_of_pallets }}</p>
+    <p>Температура в холодильнике: {{ currentStorage.temperature_in_fridge }}°C</p>
+    <p>Температура гриба: от {{ currentStorage.mushroom_temperature_min }}°C до {{ currentStorage.mushroom_temperature_max }}°C</p>
+    <p>Термометр: {{ currentStorage.thermometer_info?.info || 'Нет данных' }}</p>
+
+    <p *ngIf="currentStorage as storage">Фото:</p>
+    <div
+      *ngIf="currentStorage as storage"
+      class="photo-preview"
+      (click)="openPhotoDialog(currentStorage.photos, photoDialog, 'placement')">
+      <img [src]="currentStorage.photos[0].image" class="preview-thumb" alt="Фото гриба"/>
+      <span class="photo-count">{{ currentStorage.photos.length }}</span>
+    </div>
+  </mat-expansion-panel>
+
+    <!-- 2. Маркировка -->
+    <mat-expansion-panel *ngIf="markingPhotos?.length">
+      <mat-expansion-panel-header>
+        <mat-panel-title>2. МАРКИРОВКА ТОВАРА</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div
+        class="photo-preview"
+        (click)="openPhotoDialog(markingPhotos, photoDialog, 'marking')">
+        <img [src]="markingPhotos[0]?.image" class="preview-thumb" alt="Фото маркировки"/>
+        <span class="photo-count">{{ markingPhotos.length }}</span>
+      </div>
+    </mat-expansion-panel>
+
+    <!-- 3. Инспекция количества -->
+    <mat-expansion-panel *ngIf="inspectionRows && inspectionRows.length > 0">h">
+      <mat-expansion-panel-header>
+        <mat-panel-title>3. ИНСПЕКЦИЯ ТОВАРА</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="table-wrapper">
+        <table class="inspection-table">
+          <thead>
+            <tr>
+              <th>№ п/п</th>
+              <th>Вес брутто с поддоном, кг</th>
+              <th>Вес поддона, кг</th>
+              <th>Количество ящиков, кг</th>
+              <th>Вес нетто, кг</th>
+              <th>Вид и калибр, кг</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of inspectionRows; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ row.net_weight }}</td>
+              <td>{{ row.defect_weight }}</td>
+              <td>{{ currentStorage.quantity_of_boxes/currentStorage.quantity_of_pallets }}</td>
+              <td>{{ row.net_weight-row.defect_weight-36.6 }}</td>
+              <td>{{ row.gross_pallet_weight || 'Обычный белый 50-70мм ' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-container *ngIf="inspection.quantity_inspections?.[0]?.photos?.length">
+        <p>Фото инспекции количества:</p>
+        <div class="photo-preview"
+             (click)="openPhotoDialog(inspection.quantity_inspections[0].photos, photoDialog, 'quantity')">
+          <img [src]="inspection.quantity_inspections[0].photos[0].image"
+               class="preview-thumb" />
+          <span class="photo-count">
+            {{ inspection.quantity_inspections[0].photos.length }}
+          </span>
+        </div>
+      </ng-container>
+
+    <ng-container *ngIf="inspection.quality_inspections?.[0]?.photos?.length">
+      <p>Фото инспекции качества:</p>
+      <div class="photo-preview"
+           (click)="openPhotoDialog(inspection.quality_inspections[0].photos, photoDialog, 'quality')">
+        <img [src]="inspection.quality_inspections[0].photos[0].image"
+             class="preview-thumb" alt="Фото качества"/>
+        <span class="photo-count">
+          {{ inspection.quality_inspections[0].photos.length }}
+        </span>
+      </div>
+    </ng-container>
+</mat-expansion-panel>
+
+    <!-- 4. Погрузка -->
+    <mat-expansion-panel *ngIf="inspection.product_loading?.length">
+      <mat-expansion-panel-header>
+        <mat-panel-title>4. ПОГРУЗКА ТОВАРА</mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let loading of inspection.product_loading">
+        <p>Температура гриба: {{ loading.mushroom_temperature }} °C</p>
+        <p>Номер машины: {{ loading.car_number }}</p>
+        <p>Авторефрижератор: {{ loading.refrigerator_number }}</p>
+        <p>Пломба SGS: {{ loading.seal_number }}</p>
+        <p>Температура транспортировки: {{ loading.transport_temperature }} °C</p>
+        <p>Фото палет:</p>
+        <div *ngIf="palletPhotos?.length"
+             class="photo-preview"
+             (click)="openPhotoDialog(palletPhotos, photoDialog, 'pallets')">
+          <img [src]="palletPhotos[0]?.image" class="preview-thumb" alt="Фото палеты"/>
+          <span class="photo-count">{{ palletPhotos.length }}</span>
+        </div>
+        <p *ngIf="loading.photos?.length">Фото:</p>
+        <div
+          *ngIf="loading.photos?.length"
+          class="photo-preview"
+          (click)="openPhotoDialog(loading.photos, photoDialog, 'loading')">
+          <img [src]="loading.photos[0]?.image" alt="Фото погрузки" class="preview-thumb"/>
+          <span class="phраoto-count">{{ loading.photos.length }}</span>
+        </div>
+      </ng-container>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</div>
+
+<ng-template #photoDialog>
+  <div class="dialog-header">
+    <h2>Просмотр фото (кликните, чтобы выбрать для отчёта)</h2>
+    <button mat-icon-button mat-dialog-close class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <div class="photo-grid">
+      <div
+        *ngFor="let photo of selectedPhotos"
+        class="photo-item"
+        [class.selected]="photo.selected"
+        (click)="togglePhoto(photo, currentSection)">
+        <img [src]="photo.image" />
+      </div>
+    </div>
+  </mat-dialog-content>
+</ng-template>

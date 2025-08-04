@@ -1,0 +1,327 @@
+/* Стили для заголовка страницы */
+.table-header {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;  /* Отступ снизу */
+}
+
+/* Стили для таблицы */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Легкая тень для таблицы */
+}
+
+/* Стили для заголовков таблицы */
+.table-header-cell {
+  background-color: #adadad;  /* Синий фон для заголовков */
+  color: #262626;               /* Белый цвет текста */
+  padding: 12px 15px;         /* Увеличиваем паддинг для лучшего восприятия */
+  text-align: center;         /* Выравнивание текста по центру */
+  font-weight: bold;          /* Жирный шрифт */
+  text-transform: uppercase;  /* Преобразуем текст в верхний регистр */
+}
+
+/* Стили для строк таблицы */
+.table-cell {
+  padding: 12px 15px;         /* Увеличиваем паддинг для ячеек */
+  border: 1px solid #ddd;     /* Легкая граница для ячеек */
+  text-align: center;         /* Выравнивание текста по центру */
+}
+
+/* Чередование фона для строк */
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;  /* Светлый фон для четных строк */
+}
+
+/* Ховер эффект для строк таблицы */
+.table tbody tr:hover {
+  background-color: #f1f1f1;  /* Изменение фона при наведении */
+  cursor: pointer;            /* Курсор в виде указателя */
+}
+
+/* Добавление отступов для таблицы */
+.table {
+  margin: 0 auto;  /* Центрируем таблицу на странице */
+}
+
+.image-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 8px;
+}
+
+.image-icon-button:hover {
+  transform: scale(1.2);
+}
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+
+
+.modal-image {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.modal-close:hover {
+  transform: rotate(90deg);
+}
+
+.modal-arrow {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.modal-arrow:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.modal-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.modal-counter {
+  font-size: 18px;
+  color: #ccc;
+  min-width: 80px;
+  text-align: center;
+}
+
+
+/* Кнопка иконки шестерёнки */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 28px;
+  transition: transform 0.2s ease;
+  color: #444;
+}
+.icon-button:hover {
+  color: #007bff;
+  transform: rotate(20deg) scale(1.2);
+}
+
+/* Фон модалки */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+/* Окно модалки */
+.modal-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90vw; /* шире окно */
+  max-width: 1100px; /* больше максимальная ширина */
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  padding: 30px;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  color: #333;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  animation: scaleIn 0.25s ease forwards;
+}
+
+
+/* Список термометров */
+.thermometer-list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 20px 0;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Отдельный элемент */
+.thermometer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+.thermometer-item:last-child {
+  border-bottom: none;
+}
+
+/* Общий стиль для инпутов */
+input {
+  padding: 6px 8px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  font-size: 14px;
+  outline-color: #007bff;
+  transition: border-color 0.2s ease;
+  min-width: 100px;
+}
+input:focus {
+  border-color: #007bff;
+}
+
+/* Маленькие инпуты для даты и серийного номера */
+.small-input {
+  width: 130px;
+}
+
+/* Кнопки */
+.btn {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+.save-btn:hover {
+  background-color: #218838;
+}
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+.delete-btn:hover {
+  background-color: #c82333;
+}
+.add-btn {
+  background-color: #F36F21;
+  color: white;
+  margin-top: 8px;
+  min-width: 100px;
+}
+.add-btn:hover {
+  background-color: #d4560d;
+}
+
+/* Форма добавления нового термометра */
+.new-thermometer-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.btn-toggle {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  margin-right: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+.btn-toggle.selected {
+  background-color: #F36F21;
+  color: white;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  gap: 16px;
+  font-size: 16px;
+}
+
+.pagination-button {
+  background-color: #f26e22;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-button:not(:disabled):hover {
+  background-color: #d4560d;
+}
+
+.pagination-info {
+  font-weight: 500;
+  color: #333;
+}
+
+
+/* Анимация появления */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

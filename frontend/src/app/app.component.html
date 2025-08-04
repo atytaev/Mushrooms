@@ -1,0 +1,29 @@
+<div class="container">
+  <!-- Header -->
+  <header *ngIf="!isLoginPage && authService.isAuthenticated()" class="header">
+      <div class="logo">
+        <img src="assets/img/DTI.png" alt="Logo" class="logo-img" />
+        <div class="logo">
+          <img src="assets/img/DTI.png" alt="Logo" class="logo-img" />
+          <a class="logo-text clickable" (click)="goToInspections()">Список инспекций</a>
+        </div>
+      </div>
+
+      <div class="user-panel">
+        <span class="user-name">{{ authService.getUserName() }}</span>
+        <span class="separator">|</span>
+        <a (click)="logout()"  class="material-icons">logout</a>
+      </div>
+
+  </header>
+
+  <!-- Основной контент страницы -->
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Логотип в правом нижнем углу -->
+  <div class="image-container-logo">
+    <img src="assets/img/logo_cat.png" alt="Logo Icon" class="small-image-logo m-2">
+  </div>
+</div>

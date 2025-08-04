@@ -1,0 +1,170 @@
+.container {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: #ffffff;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 2px -2px gray;
+  padding: 30px 0;
+}
+
+.clickable {
+  cursor: pointer;
+
+  color: inherit;
+}
+
+/* Логотип */
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo-img {
+  width: 60px;
+  height: auto;
+}
+
+/* Навигация */
+.nav {
+  display: flex;
+  justify-content: left; /* Центрирование элементов по горизонтали */
+  align-items: left;
+  width: 100%;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #FFA500;
+  font-size: 21px;
+  padding-bottom: 5px; /* Отступ снизу для линии */
+  position: relative;
+  transition: color 0.3s;
+  display: inline-block;
+}
+
+/* Подчеркивание активной вкладки нижней линией */
+.nav-link.active-tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #fff;
+}
+
+/* При наведении можно менять цвет текста */
+.nav-link:hover {
+  color: #ddd;
+}
+
+/* Подчеркивание активной вкладки нижней линией */
+.nav-link.active-tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #F36F21;
+}
+
+/* При наведении можно менять цвет текста */
+.nav-link:hover {
+  color: #fac09e;
+}
+
+
+/* Панель пользователя */
+.user-panel {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: #FFA500;
+}
+
+.separator {
+  margin: 0 8px; /* Отступ слева и справа от палочки */
+  color: white; /* Цвет палочки */
+}
+
+.logout-link {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.logout-link:hover {
+  color: #f36f21;
+}
+
+/* Основной контент */
+main {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+/* Логотип в правом нижнем углу */
+.image-container-logo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.small-image-logo {
+  height: 50px;
+  width: auto;
+}
+
+.material-icons {
+  font-size: 30px;
+  vertical-align: middle;
+  color: #000; /* или orange, white и т.д. */
+}
+
+.logo-text {
+  margin-left:60px;
+  font-size: 21px;
+  font-weight: bold;
+  color: #FFA500;
+}
+
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .logo-img {
+    width: 100px;
+  }
+  .nav-link {
+    font-size: 16px;
+  }
+  .user-panel {
+    font-size: 14px;
+  }
+}

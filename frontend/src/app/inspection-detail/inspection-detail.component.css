@@ -1,0 +1,180 @@
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.export-btn {
+  margin-top: 10px;
+}
+
+.header-row h3 {
+  margin: 0 0 8px 0;
+}
+
+.export-btn {
+  align-self: flex-start;
+  background-color: white;
+  color: #0036ff;
+  font-weight: 500;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.export-btn mat-icon {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+mat-accordion {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+mat-expansion-panel {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 0 !important;
+}
+
+mat-expansion-panel-header {
+  background-color: #FF9706 !important;
+  color: white !important;
+  padding-left: 16px;
+}
+
+mat-expansion-panel p {
+  color: black;
+  font-weight: 400;
+  margin: 6px 0;
+}
+
+img {
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.inspection-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  color: black;
+}
+
+.inspection-table th,
+.inspection-table td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.inspection-table thead {
+  background-color: #e0e0e0;
+  font-weight: 600;
+}
+
+.inspection-table tbody tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+/* Диалоговая сетка — задаём минимум 200px на фото и растягиваем максимум до доступного места */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  justify-items: center; /* центрируем карточки внутри ячеек */
+}
+
+/* Карточка фото */
+.photo-item {
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  width: 100%;            /* чтобы растягивалась на всю ширину ячейки */
+  max-width: 100%;
+}
+
+/* Hover-эффект */
+.photo-item:hover {
+  transform: scale(1.03);
+}
+
+/* Фото внутри карточки */
+.photo-item img {
+  display: block;
+  width: 100%;            /* заполняет карточку по ширине */
+  height: auto;
+  object-fit: cover;
+}
+
+/* Обёртка заголовка — теперь позиционируется относительно */
+.dialog-header {
+  position: relative;
+  padding: 16px 48px 16px 24px; /* оставляем место справа для крестика */
+}
+
+/* Кнопка закрытия — всегда в правом верхнем углу */
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+/* Выделение выбранного фото */
+.photo-item.selected {
+  border: 4px solid #FF9706;
+  box-shadow: 0 0 0 2px rgba(255,151,6,0.5); /* светящееся обрамление вокруг */
+}
+
+
+.photo-preview {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.preview-thumb {
+  display: block;
+  width: 100%;      /* картинка будет 40% от ширины панели */
+  max-width: 200px;/* или любой максимум по вкусу */
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  margin-top: 8px; /* чуть отступ сверху, если нужно */
+}
+
+.photo-count {
+  position: absolute;
+  bottom: 4%;
+  right: 4%;
+  width: 15%;                /* чуть больше, чем 7% */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(240, 240, 240, 0.9);  /* светлый серый фон */
+  color: #555;                           /* мягкий тёмно-серый текст */
+  font-size:1em;                      /* чуть больше, чтобы цифра влезла */
+  font-weight: 500;                      /* полужирный, но не слишком */
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+
+
+
